@@ -1,172 +1,47 @@
 \documentclass[a4paper,11pt]{article}
 
-% Package imports
-\usepackage{latexsym}
-\usepackage{xcolor}
-\usepackage{float}
-\usepackage{ragged2e}
-\usepackage[empty]{fullpage}
-\usepackage{wrapfig}
-\usepackage{lipsum}
-\usepackage{tabularx}
-\usepackage{titlesec}
-\usepackage{geometry}
-\usepackage{marvosym}
-\usepackage{verbatim}
-\usepackage{enumitem}
-\usepackage{fancyhdr}
-\usepackage{multicol}
-\usepackage{graphicx}
-\usepackage{cfr-lm}
-\usepackage[T1]{fontenc}
-\usepackage{fontawesome5}
+% --- Packages ---
+\usepackage{xcolor, graphicx, fontawesome5, hyperref, geometry, titlesec, enumitem, fancyhdr, tabularx}
+\usepackage[T1]{fontenc} % Improved font encoding
+\usepackage[empty]{fullpage} % Clean page layout
+
+% --- Page Layout ---
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+\pagestyle{fancy}
+\fancyhf{} % Clear headers/footers
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
 
 % Color definitions
 \definecolor{darkblue}{RGB}{0,0,139}
 
-% Page layout
-\setlength{\multicolsep}{0pt} 
-\pagestyle{fancy}
-\fancyhf{} % clear all header and footer fields
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
-\setlength{\footskip}{5pt} % Addressing fancyhdr warning
-
-% Hyperlink setup (moved after fancyhdr to address warning)
-\usepackage[hidelinks]{hyperref}
+% --- Hyperlink Setup ---
 \hypersetup{
     colorlinks=true,
-    linkcolor=darkblue,
-    filecolor=darkblue,
-    urlcolor=darkblue,
+    linkcolor=black,
+    filecolor=black,
+    urlcolor=black,
 }
 
-% Custom box settings
-\usepackage[most]{tcolorbox}
-\tcbset{
-    frame code={},
-    center title,
-    left=0pt,
-    right=0pt,
-    top=0pt,
-    bottom=0pt,
-    colback=gray!20,
-    colframe=white,
-    width=\dimexpr\textwidth\relax,
-    enlarge left by=-2mm,
-    boxsep=4pt,
-    arc=0pt,outer arc=0pt,
-}
 
-% URL style
-\urlstyle{same}
+% --- Section Formatting ---
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
 
-% Text alignment
-\raggedright
-\setlength{\tabcolsep}{0in}
-
-% Section formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
-
-% Custom commands
-\newcommand{\resumeItem}[2]{
-  \item{
-    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
-  }
-}
-
-\newcommand{\resumePOR}[3]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
-    \end{tabular*}
-    \vspace{-2mm}
-}
-
-\newcommand{\resumeSubheading}[4]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#4}} \\
-        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
-    \end{tabular*}
-    \vspace{-2.4mm}
-}
-
-\newcommand{\resumeProject}[4]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#3}} \\
-        \footnotesize{\textit{#2}} & \footnotesize{#4}
-    \end{tabular*}
-    \vspace{-2.4mm}
-}
-
-\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
-
-\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
-\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
-\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
-
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
-\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
-\newcommand{\cvsection}[1]{%
-\vspace{2mm}
-\begin{tcolorbox}
-    \textbf{\large #1}
-\end{tcolorbox}
-    \vspace{-4mm}
-}
-
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
-\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
-\newcolumntype{C}{>{\centering\arraybackslash}X}%
-
-% Commands for icon sizing and positioning
-\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
-\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
-
-% Font options
-\newcommand{\headerfonti}{\fontfamily{phv}\selectfont} % Helvetica-like (similar to Arial/Calibri)
-\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont} % Times-like (similar to Times New Roman)
-\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont} % Palatino (elegant serif)
-\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont} % Bookman (readable serif)
-\newcommand{\headerfontv}{\fontfamily{pag}\selectfont} % Avant Garde-like (similar to Trebuchet MS)
-\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont} % Computer Modern Sans Serif
-\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont} % Quasi-Helvetica (another Arial/Calibri alternative)
-\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont} % Quasi-Palatino (another elegant serif option)
-\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont} % Quasi-Times (another Times New Roman alternative)
-\newcommand{\headerfontx}{\fontfamily{bch}\selectfont} % Charter (clean serif font)
+% --- Custom Commands ---
+\newcommand{\resumeItem}[2]{\item \textbf{#1}: #2}
+\newcommand{\resumeSubheading}[4]{\item \textbf{#1}, \textit{#2} \\ \textit{#3} | #4}
+\newcommand{\resumeProject}[2]{\item \textbf{#1}: #2}
 
 \begin{document}
-\headerfontiii
 
-% Header
+% --- Header ---
 \begin{center}
-    {\Huge\textbf{Ajay Solanki}}
-\end{center}
-\vspace{-5mm}
-
-\begin{center}
+    {\Huge \textbf{Ajay Solanki}} \\[5pt]
     \small{
-    +91-
-    7470854697 | \href{mailto:ajaysingh16601@gmail.com}{ajaysingh16601@gmail.com} |
-    }
-\end{center}
-\vspace{-5.5mm}
-
-\begin{center}
-    \small{
-    \socialicon{\faLinkedin} \href{https://www.linkedin.com/in/ajaysinghsolanki/}{ajaysinghsolanki} | 
-    \socialicon{\faGithub} \href{https://github.com/ajaysingh16601}{ajaysingh16601} | 
-    \socialicon{\faIcon{globe}} \href{https://portfolio-threejs-ashy.vercel.app/}{Portfolio} 
+        \faPhone\ +91-7470854697 | 
+        \href{mailto:ajaysingh16601@gmail.com}{\faEnvelope\ ajaysingh16601@gmail.com} | 
+        \href{https://github.com/ajaysingh16601}{\faGithub\ ajaysingh16601} | \href{https://www.linkedin.com/in/ajaysinghsolanki/}{\faLinkedin\ ajaysinghsolanki} |
+        {\faIcon{globe}} \href{https://portfolio-threejs-ashy.vercel.app/}{Portfolio} 
     }
 \end{center}
 \vspace{-5.5mm}
@@ -174,116 +49,66 @@
     \small{Palasia, Indore - 452001, India}
 \end{center}
 
-\vspace{-4mm}
-
-\section{\textbf{Objective}}
-\vspace{1mm}
+% --- Objective ---
+\section{Objective}
 \small{
-  FullStack Developer with 1.8+ years of experience in building scalable, high-performance applications using React, Angular, and Node.js. Proven ability to drive innovative solutions in web development and collaborate effectively with cross-functional teams to deliver high-quality software. Passionate about leveraging cutting-edge technologies to improve efficiency and user experience. 
+       Passionate and motivated Software Developer with over 2 years of experience in designing and developing web applications. Proficient in JavaScript and its frameworks, with a strong grasp of the software development life cycle (SDLC) and best practices. Adept at driving innovative solutions in web development and collaborating effectively with cross-functional teams to deliver high-quality software.
+
 }
-\vspace{-2mm}
 
-
-\section{\textbf{Skills}}
-\vspace{-0.2mm}
-\resumeHeadingSkillStart
-    \resumeSubItem{Programming Languages:}
-        {JavaScript, TypeScript, HTML, CSS}
-    \resumeSubItem{Frameworks and Libraries:}
-        {Angular, React.js, Node.js, Express.js, Redux-toolkit, Material UI, Bootstrap}
-    \resumeSubItem{Database Systems:}
-        {MongoDB, PostgreSQL}
-    \resumeSubItem{Version Control \& Cloud Technologies:}
+% --- Technical Skills ---
+\section{Technical Skills}
+\begin{itemize}[leftmargin=10pt]
+    \resumeItem{Languages}{JavaScript (ES6+), TypeScript, HTML, CSS}
+    \resumeItem{Frameworks and Libraries}{React.js, Angular, Node.js, Express.js, Redux-toolkit, Material UI, Bootstrap}
+    \resumeItem{Databases}{MongoDB, PostgreSQL}
+    \resumeItem{Version Control \& Cloud Technologies}
         {Git, GitHub, Docker, Nginx}
-    \resumeSubItem{Other Tools \& Technologies:}
+    \resumeItem{Other Tools \& Technologies}
         {Postman, Sublime Text, VS Code, RESTful API Development}
-    \resumeSubItem{Operating Systems (OS):}
+    \resumeItem{Operating Systems (OS)}
         {Linux, macOS, Windows}
-\resumeHeadingSkillEnd
+\end{itemize}
 
-\section{\textbf{Professional Experience}}
-\vspace{-0.4mm}
-  \resumeSubHeadingListStart
-  \resumeSubheading
-{{Cyber Infrastructure (P) Ltd}}{Indore, India}
+% --- Work Experience ---
+\section{Professional Experience}
+\begin{itemize}[leftmargin=10pt]
+    \resumeSubheading{Cyber Infrastructure (P) Ltd}{Indore, India}
 {Software Engineer}{May 2023 - Present}
-\resumeItemListStart
-    \item Designed and implemented scalable system architectures for multiple projects. Developed projects using Angular, React, Node.js, Express.js, Redux, Redux-toolkit, and Material UI.
-    \item Worked closely with the business team to understand and fulfill client requirements. Analyzed client requirements, performed RD, and provided accurate project estimates and responses.
-    \item Collaborated with cross-functional teams to deliver features and optimize performance. Facilitated clear communication with global clients, ensuring project success and satisfaction.
-\resumeItemListEnd
-  \resumeSubHeadingListEnd
-\vspace{-6mm}
+    \begin{itemize}
+        \item Designed and implemented scalable system architectures for multiple projects. Developed projects using Angular, React, Node.js, Express.js, Redux, Redux-toolkit, and Material UI.
+        \item Worked closely with the business team to understand and fulfill client requirements. Analyzed client requirements, performed RND and provided accurate project estimates and responses.
+        \item Collaborated with cross-functional teams to deliver features and optimize performance. Facilitated clear communication with global clients, ensuring project success and satisfaction.
+    \end{itemize}
+    
+    \resumeSubheading{Technovation Unicorns}{Bangalore, India}
+    {Software Engineer Intern}{Jan 2023 - April 2023}
+    \begin{itemize}
+        \item Developed a full-stack Employee Management System using MERN stack.
+        \item Designed and implemented reusable UI components in React, improving scalability.
+        \item Optimized backend queries using MongoDB aggregation, reducing response time by 30\%.
+    \end{itemize}
+\end{itemize}
 
-\vspace{-0.6mm}
-  \resumeSubHeadingListStart
-  \resumeSubheading
-      {{Technovation Unicorns }}{Banglore, India}
-      {Software Engineer Intern}{Jan 2023 - April 2023}
-      \resumeItemListStart
-        \item Technovation Unicorns helps me keep my projects organized.
-        \item Developed an Employee Management System utilized design tools for the project planning.
-        \item Independently built the project using MERN and proficient in performing CRUD operations.
-      \resumeItemListEnd 
-  \resumeSubHeadingListEnd
-\vspace{-6mm}
+% --- Projects ---
+\section{Projects}
+\begin{itemize}[leftmargin=10pt]
+    \resumeProject{Banking System - Micro Finance Bank}
+    {Developed a banking system for financial transactions, loans, and investments, serving clients in Nigeria and South Africa. MFB is designed to manage the bank's administrative workflow, empowering users to take control of their financial well-being by offering seamless solutions for payment management, investments, mobile recharge, and loans.}
 
+    \resumeProject{Cowrie - Cryptocurrency Exchange}
+    {Cowrie is a cutting-edge cryptocurrency exchange platform based in South Africa. Designed to cater to the growing demand for digital assets, Cowrie offers a seamless experience for buying, selling, and exchanging various cryptocurrencies. With real-time transaction capabilities, and to participate in the exciting world of cryptocurrency trading.}
 
-\section{\textbf{Projects}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
+    \resumeProject{Yasa Student App}
+    {Yasa Student App is a platform empowering students to connect with instructors, explore courses, and participate in interactive virtual classrooms. Its user-friendly interface and robust features enhance learning and help students achieve academic goals through convenient online education.}
+\end{itemize}
 
-\resumeProject
-  {Maal Banking System - Micro Finance Bank  }
-  {Tools: Angular, Material, Python3, Django, Django Rest Framework, PostgreSQL, Microservices, Nginx}
-  {}{}
-  
-\resumeItemListStart
-  \item 
-    Maal is a Bank Application used in Nigeria, SA, to manage TAJ Bank's administrative workflow. It's a dynamic and innovative organization revolutionizing financial management. With user-centric services, Maal empowers users to take control of their financial well-being by offering seamless solutions for payment management, 
-    investments, mobile recharge, and loans.
-
-\resumeItemListEnd
-
-\resumeProject
-  {Cowrie - Cryptocurrency Exchange }
-  {Tools: React Js, Node Js, Express Js, MongoDB, Blockchain, BootStrap}
-  {}{}
-\resumeItemListStart
-  \item Cowrie is a cutting-edge cryptocurrency exchange platform based in South Africa. Designed to cater to the growing demand for digital assets, Cowrie offers a seamless experience for buying, selling, and exchanging various cryptocurrencies. With real-time transaction capabilities, and to participate in the exciting world of cryptocurrency trading.
-
-\resumeItemListEnd
-
-\resumeProject
-    {Yasa Student App}
-    {Tools: React.js, Node.js, Express.js, MongoDB, Bootstrap}
-    {}{}
-\resumeItemListStart
-    \item Yasa Student App is a platform empowering students to connect with instructors, explore courses, and participate in interactive virtual classrooms. Its user-friendly interface and robust features enhance learning and help students achieve academic goals through convenient online education.
-\resumeItemListEnd
-\resumeSubHeadingListEnd
-\vspace{-5mm}
-
-
-\section{\textbf{Education}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-
-\resumeSubheading
-{Bachelor of Technology, Computer Science and Engineering}{Indore, India}
-{Medi-Caps University }{2019 - 2023}
-
-\resumeSubHeadingListEnd
-\vspace{-6mm}
-
-\section{\textbf{Additional Information}}
-\vspace{-0.4mm}
-\small{
-\textbf{Languages:}  English, Hindi
-
-\textbf{Interests:} Technology Trends,  Sports, Hiking
-}
-
-\vspace{-4mm}
+% --- Additional Information ---
+\section{Additional Information}
+\begin{itemize}[leftmargin=10pt]
+    \resumeItem{Bachelor of Technology, Computer Science and Engineering}{Indore, India} {2019 - 2023}
+    \resumeItem{Languages:}  English, Hindi
+    \resumeItem{Interests:} Technology Trends,  Sports, Hiking
+\end{itemize}
 
 \end{document}
